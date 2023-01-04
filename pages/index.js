@@ -47,7 +47,7 @@ export default function Home() {
                 <link rel='icon' href='/favicon.ico' />
             </Head>
 
-            <div className='main-div'>
+            <div className='m-6'>
                 {!user ? (
                     <>
                         <h4>
@@ -55,7 +55,7 @@ export default function Home() {
                             wallet
                         </h4>
                         <button
-                            className='button'
+                            className='bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded'
                             onClick={() => {
                                 signIn();
                             }}>
@@ -64,23 +64,28 @@ export default function Home() {
                     </>
                 ) : (
                     <>
-                        <h4>Welcome {user}</h4>
-                        <h4>
-                            The contract says: {greeting}
-                        </h4>
+                        <div>
+                            <span>Welcome </span>
+                            <span className='text-blue-400 text-xl'>{user}</span>
+                        </div>
+                        <div>
+                            <span>The contract says: </span>
+                            <span className='text-blue-400 text-xl'>{greeting}</span>
+                        </div>
                         <form onSubmit={changeGreeting}>
                             <label>Change greeting:</label>
-                            <div>
-                                <input
-                                    autoComplete='off'
-                                    defaultValue={greeting}
-                                    id='greetingInput'
-                                />
-                                <button>Save</button>
-                            </div>
+                            <input
+                                className='mx-4 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                                autoComplete='off'
+                                id='greetingInput'
+                                placeholder='New message'
+                            />
+                            <button className='bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded'>
+                                Save
+                            </button>
                         </form>
                         <button
-                            className='button'
+                            className='bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded'
                             onClick={() => {
                                 signOut();
                                 setUser(null);
