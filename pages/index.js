@@ -66,7 +66,7 @@ export default function Home() {
                     <>
                         <h4>Welcome {user}</h4>
                         <h4>
-                            The contract says: <span>{greeting}</span>
+                            The contract says: {greeting}
                         </h4>
                         <form onSubmit={changeGreeting}>
                             <label>Change greeting:</label>
