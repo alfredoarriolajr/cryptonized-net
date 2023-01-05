@@ -12,18 +12,19 @@ import {
     viewFunction,
     callFunction,
 } from '../near/near-setup';
+import NFT from './nft';
 
 export default function Home() {
     const [user, setUser] = useState(null);
+    console.log(user);
     const [greeting, setGreeting] = useState(null);
-    console.log(wallet);
 
     useEffect(() => {
         if (wallet.getAccountId()) {
+    console.log(user);
             setUser(wallet.getAccountId());
         }
         viewFunction('get_greeting').then((result) => {
-            console.log(result);
             setGreeting(result);
         });
     }, []);
@@ -92,6 +93,7 @@ export default function Home() {
                             }}>
                             Sign out
                         </button>
+                        {/* <NFT /> */}
                     </>
                 )}
             </div>
