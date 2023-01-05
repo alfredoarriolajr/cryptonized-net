@@ -26,23 +26,23 @@ export default function NFT() {
                     setNft(result);
                 }
             );
-            createNFT();
+            // createNFT();
             console.log('user', user);
         }
     }, [user]);
 
-    const createNFT = async () => {
-        await callFunction('nft_mint', {
-                "token_id": "2",
-                "metadata": {
-                  "title": "Cryptonized",
-                  "description": "My 1st NFT",
-                  "media": "https://media.licdn.com/dms/image/C560BAQGnbrbibTKR6Q/company-logo_200_200/0/1672737295471?e=1680739200&v=beta&t=dhlWalKcErYK8iwwIWGmIr4C1U2SIDT43OCGDMzIn7w"
-                },
-                "receiver_id": "fred0.testnet"
-              }
-        );
-    };
+    // const createNFT = async () => {
+    //     await callFunction('nft_mint', {
+    //             "token_id": "2",
+    //             "metadata": {
+    //               "title": "Cryptonized",
+    //               "description": "My 1st NFT",
+    //               "media": "https://media.licdn.com/dms/image/C560BAQGnbrbibTKR6Q/company-logo_200_200/0/1672737295471?e=1680739200&v=beta&t=dhlWalKcErYK8iwwIWGmIr4C1U2SIDT43OCGDMzIn7w"
+    //             },
+    //             "receiver_id": "fred0.testnet"
+    //           }
+    //     );
+    // };
 
     return (
         <div>
