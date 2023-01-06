@@ -13,7 +13,7 @@ import {
     viewFunction,
     callFunction,
 } from '../near/cryptonized';
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
+// import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 export default function NFT() {
     const [user, setUser] = useState(null);
@@ -21,9 +21,9 @@ export default function NFT() {
     const [newNft, setNewNft] = useState(null);
     const [newTitle, setNewTitle] = useState(null);
     const [newDescription, setNewDescription] = useState(null);
-    const [newMedia, setNewMedia] = useState('');
+    // const [newMedia, setNewMedia] = useState('');
     const id = uuid().slice(0, 16).replace(/-/g, '');
-    const supabase = useSupabaseClient();
+    // const supabase = useSupabaseClient();
 
     useEffect(() => {
         if (wallet.getAccountId()) {
@@ -33,22 +33,20 @@ export default function NFT() {
                     setNewNft(result);
                 }
             );
-            getStripeSubscription();
+            // getStripeSubscription();
         }
     }, [user]);
 
-    const getStripeSubscription = async () => {
-        const { data } = supabase.storage
-        .from('cryptonized')
-        .getPublicUrl(
-            'folder/avatar1.png'
-        );
-    setNewMedia(data.publicURL);
-    };
+    // const getStripeSubscription = async () => {
+    //     const { data } = supabase.storage
+    //         .from('cryptonized')
+    //         .getPublicUrl('folder/avatar1.png');
+    //     setNewMedia(data.publicURL);
+    // };
 
-    const uploadFile = async () => {
-        const { data, error } = await supabase.storage.getBucket('cryptonized');
-    };
+    // const uploadFile = async () => {
+    //     const { data, error } = await supabase.storage.getBucket('cryptonized');
+    // };
 
     const createNFT = async () => {
         await callFunction(
@@ -58,8 +56,8 @@ export default function NFT() {
                 metadata: {
                     title: newTitle,
                     description: newDescription,
-                    media: newMedia,
-                    // media: 'https://media.licdn.com/dms/image/C560BAQGnbrbibTKR6Q/company-logo_200_200/0/1672737295471?e=1680739200&v=beta&t=dhlWalKcErYK8iwwIWGmIr4C1U2SIDT43OCGDMzIn7w',
+                    // media: newMedia,
+                    media: 'https://media.licdn.com/dms/image/C560BAQGnbrbibTKR6Q/company-logo_200_200/0/1672737295471?e=1680739200&v=beta&t=dhlWalKcErYK8iwwIWGmIr4C1U2SIDT43OCGDMzIn7w',
                 },
                 receiver_id: user,
             },
@@ -68,9 +66,9 @@ export default function NFT() {
         );
     };
 
-    function handleChange(event) {
-        setNewMedia(event.target.files[0]);
-    }
+    // function handleChange(event) {
+    //     setNewMedia(event.target.files[0]);
+    // }
 
     return (
         <div>
@@ -102,11 +100,13 @@ export default function NFT() {
                     <>
                         <div className='mt-6'>
                             <div>
-                                <h1 className='text-yellow-500 mb-4'>Javascript Contract</h1>
+                                <h1 className='text-yellow-500 mb-4'>
+                                    Javascript Contract
+                                </h1>
                                 <form className=''>
                                     <label htmlFor='title'>Title: </label>
                                     <input
-                                    className='border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none mx-2'
+                                        className='border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none mx-2'
                                         type='text'
                                         name='title'
                                         id='title'
@@ -115,10 +115,10 @@ export default function NFT() {
                                         }
                                     />
                                     <label htmlFor='description'>
-                                        Description: 
+                                        Description:
                                     </label>
                                     <input
-                                    className='border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none mx-2'
+                                        className='border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none mx-2'
                                         type='text'
                                         name='description'
                                         id='description'
@@ -128,21 +128,37 @@ export default function NFT() {
                                     />
                                     {/* <input
                                         type='file'
-                                        onChange={async () => {
-                                            const { data } = supabase.storage
-                                                .from('cryptonized')
-                                                .getPublicUrl(
-                                                    'folder/avatar1.png'
-                                                );
-                                            setNewMedia(data.publicURL);
+                                        onChange={async (event) => {
+                                            const avatarFile =
+                                                event.target.files[0];
+                                            const { data, error } =
+                                                await supabase.storage
+                                                    .from('cryptonized')
+                                                    .upload(
+                                                        'public/avatar2.png',
+                                                        avatarFile,
+                                                        {
+                                                            cacheControl:
+                                                                '3600',
+                                                            upsert: false,
+                                                        }
+                                                    );
+                                            setNewMedia(data);
+                                            console.log(data);
                                         }}
                                     /> */}
                                 </form>
-                                <button className='bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded my-6' onClick={createNFT}>Create NFT</button>
+                                <button
+                                    className='bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded my-6'
+                                    onClick={createNFT}>
+                                    Create NFT
+                                </button>
                             </div>
                             {newNft && (
                                 <div>
-                                    <h1 className='text-2xl border-t-4 pt-4'>Your NFTs</h1>
+                                    <h1 className='text-2xl border-t-4 pt-4'>
+                                        Your NFTs
+                                    </h1>
                                     <div className='flex flex-wrap'>
                                         {newNft.map((token) => (
                                             <div
