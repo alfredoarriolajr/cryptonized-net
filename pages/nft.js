@@ -142,9 +142,8 @@ export default function NFT() {
                                             console.log('data', data);
                                         }}
                                     /> */}
-                                <button className='bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded my-6' onClick={createNFT}>Create NFT</button>
-
                                 </form>
+                                <button className='bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded my-6' onClick={createNFT}>Create NFT</button>
                             </div>
                             {newNft && (
                                 <div>
