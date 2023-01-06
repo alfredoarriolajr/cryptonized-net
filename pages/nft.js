@@ -106,7 +106,7 @@ export default function NFT() {
                     <>
                         <div className='mt-6'>
                             <div>
-                                <h1>Javascript Contract</h1>
+                                <h1 className='text-yellow-500 mb-1'>Javascript Contract</h1>
                                 <form className='flex flex-col'>
                                     <label htmlFor='title'>Title</label>
                                     <input
