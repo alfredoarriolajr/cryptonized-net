@@ -21,7 +21,7 @@ export default function Home() {
 
     useEffect(() => {
         if (wallet.getAccountId()) {
-    console.log(user);
+            console.log(user);
             setUser(wallet.getAccountId());
         }
         viewFunction('get_greeting').then((result) => {
@@ -48,7 +48,7 @@ export default function Home() {
                 <link rel='icon' href='/favicon.ico' />
             </Head>
 
-            <div className='m-6'>
+            <div className='m-6 border-t-4'>
                 {!user ? (
                     <>
                         <h4>
@@ -65,13 +65,18 @@ export default function Home() {
                     </>
                 ) : (
                     <>
+                        <h1 className='mt-6'>Rust Contract</h1>
                         <div>
                             <span>Welcome </span>
-                            <span className='text-blue-400 text-xl'>{user}</span>
+                            <span className='text-blue-400 text-xl'>
+                                {user}
+                            </span>
                         </div>
                         <div>
                             <span>The contract says: </span>
-                            <span className='text-blue-400 text-xl'>{greeting}</span>
+                            <span className='text-blue-400 text-xl'>
+                                {greeting}
+                            </span>
                         </div>
                         <form onSubmit={changeGreeting}>
                             <label>Change greeting:</label>
@@ -93,7 +98,8 @@ export default function Home() {
                             }}>
                             Sign out
                         </button>
-                        {/* <NFT /> */}
+                        
+                        <NFT />
                     </>
                 )}
             </div>

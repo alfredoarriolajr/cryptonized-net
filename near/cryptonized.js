@@ -7,11 +7,12 @@ import {
   
   
   
-  export const CONTRACT_ID = "dev-1672891977078-86027758555184";
+  export const CONTRACT_ID = "dev-1672990858048-58508459530403";
   
   export const initNear2 = () => {
     //Testnet config
     const near = new Near({
+      owner_id: CONTRACT_ID,
       networkId: "testnet",
         keyStore: new keyStores.BrowserLocalStorageKeyStore(),
         nodeUrl: "https://rpc.testnet.near.org",
