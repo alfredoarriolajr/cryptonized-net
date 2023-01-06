@@ -24,7 +24,6 @@ export default function NFT() {
     const [newMedia, setNewMedia] = useState('');
     const id = uuid().slice(0, 16).replace(/-/g, '');
     const supabase = useSupabaseClient();
-    console.log('supabase', supabase);
 
     useEffect(() => {
         if (wallet.getAccountId()) {
@@ -32,10 +31,8 @@ export default function NFT() {
             viewFunction('nft_tokens_for_owner', { account_id: user }).then(
                 (result) => {
                     setNewNft(result);
-                    console.log('result', result);
                 }
             );
-            console.log('user', user);
             getStripeSubscription();
         }
     }, [user]);
@@ -47,7 +44,6 @@ export default function NFT() {
             'folder/avatar1.png'
         );
     setNewMedia(data.publicURL);
-    console.log('data', data);
     };
 
     const uploadFile = async () => {
@@ -139,7 +135,6 @@ export default function NFT() {
                                                     'folder/avatar1.png'
                                                 );
                                             setNewMedia(data.publicURL);
-                                            console.log('data', data);
                                         }}
                                     /> */}
                                 </form>

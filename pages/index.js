@@ -16,12 +16,10 @@ import NFT from './nft';
 
 export default function Home() {
     const [user, setUser] = useState(null);
-    console.log(user);
     const [greeting, setGreeting] = useState(null);
 
     useEffect(() => {
         if (wallet.getAccountId()) {
-            console.log(user);
             setUser(wallet.getAccountId());
         }
         viewFunction('get_greeting').then((result) => {
