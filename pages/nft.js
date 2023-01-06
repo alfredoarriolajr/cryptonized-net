@@ -87,7 +87,7 @@ export default function NFT() {
                 <link rel='icon' href='/favicon.ico' />
             </Head>
 
-            <div className='mt-6 border-t-4'>
+            <div className='mt-6 border-t-4 border-b-4 pb-2'>
                 {!user ? (
                     <>
                         <h4>
@@ -106,26 +106,26 @@ export default function NFT() {
                     <>
                         <div className='mt-6'>
                             <div>
-                                <h1 className='text-yellow-500 mb-1'>Javascript Contract</h1>
-                                <form className='flex flex-col'>
-                                    <label htmlFor='title'>Title</label>
+                                <h1 className='text-yellow-500 mb-4'>Javascript Contract</h1>
+                                <form className=''>
+                                    <label htmlFor='title'>Title: </label>
                                     <input
+                                    className='border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none mx-2'
                                         type='text'
                                         name='title'
                                         id='title'
-                                        placeholder='Title'
                                         onChange={(e) =>
                                             setNewTitle(e.target.value)
                                         }
                                     />
                                     <label htmlFor='description'>
-                                        Description
+                                        Description: 
                                     </label>
                                     <input
+                                    className='border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none mx-2'
                                         type='text'
                                         name='description'
                                         id='description'
-                                        placeholder='Description'
                                         onChange={(e) =>
                                             setNewDescription(e.target.value)
                                         }
@@ -142,12 +142,13 @@ export default function NFT() {
                                             console.log('data', data);
                                         }}
                                     /> */}
+                                <button className='bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded my-6' onClick={createNFT}>Create NFT</button>
+
                                 </form>
-                                <button onClick={createNFT}>Create NFT</button>
                             </div>
                             {newNft && (
                                 <div>
-                                    <h1 className='text-2xl'>Your NFTs</h1>
+                                    <h1 className='text-2xl border-t-4 pt-4'>Your NFTs</h1>
                                     <div className='flex flex-wrap'>
                                         {newNft.map((token) => (
                                             <div
