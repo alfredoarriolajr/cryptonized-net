@@ -30,6 +30,6 @@ function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
     </SessionContextProvider>
     );
-}
+} 
 
 export default MyApp;
