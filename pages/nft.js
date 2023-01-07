@@ -21,7 +21,7 @@ export default function NFT() {
     const [newTitle, setNewTitle] = useState(null);
     const [newDescription, setNewDescription] = useState(null);
     const [newMedia, setNewMedia] = useState('');
-    const id = uuid().slice(0, 16).replace(/-/g, '');
+    const id = uuid()
     const supabase = useSupabaseClient();
 
     useEffect(() => {
@@ -44,7 +44,7 @@ export default function NFT() {
                     title: newTitle,
                     description: newDescription,
                     media:
-                        newMediaZx ||
+                        newMedia ||
                         'https://media.licdn.com/dms/image/C560BAQGnbrbibTKR6Q/company-logo_200_200/0/1672737295471?e=1680739200&v=beta&t=dhlWalKcErYK8iwwIWGmIr4C1U2SIDT43OCGDMzIn7w',
                 },
                 receiver_id: user,
