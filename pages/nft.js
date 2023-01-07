@@ -13,17 +13,16 @@ import {
     viewFunction,
     callFunction,
 } from '../near/cryptonized';
-// import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 export default function NFT() {
     const [user, setUser] = useState(null);
-    // const [metadata, setMetadata] = useState(null);
     const [newNft, setNewNft] = useState(null);
     const [newTitle, setNewTitle] = useState(null);
     const [newDescription, setNewDescription] = useState(null);
-    // const [newMedia, setNewMedia] = useState('');
+    const [newMedia, setNewMedia] = useState('');
     const id = uuid().slice(0, 16).replace(/-/g, '');
-    // const supabase = useSupabaseClient();
+    const supabase = useSupabaseClient();
 
     useEffect(() => {
         if (wallet.getAccountId()) {
@@ -33,20 +32,8 @@ export default function NFT() {
                     setNewNft(result);
                 }
             );
-            // getStripeSubscription();
         }
     }, [user]);
-
-    // const getStripeSubscription = async () => {
-    //     const { data } = supabase.storage
-    //         .from('cryptonized')
-    //         .getPublicUrl('folder/avatar1.png');
-    //     setNewMedia(data.publicURL);
-    // };
-
-    // const uploadFile = async () => {
-    //     const { data, error } = await supabase.storage.getBucket('cryptonized');
-    // };
 
     const createNFT = async () => {
         await callFunction(
@@ -56,8 +43,9 @@ export default function NFT() {
                 metadata: {
                     title: newTitle,
                     description: newDescription,
-                    // media: newMedia,
-                    media: 'https://media.licdn.com/dms/image/C560BAQGnbrbibTKR6Q/company-logo_200_200/0/1672737295471?e=1680739200&v=beta&t=dhlWalKcErYK8iwwIWGmIr4C1U2SIDT43OCGDMzIn7w',
+                    media:
+                        newMediaZx ||
+                        'https://media.licdn.com/dms/image/C560BAQGnbrbibTKR6Q/company-logo_200_200/0/1672737295471?e=1680739200&v=beta&t=dhlWalKcErYK8iwwIWGmIr4C1U2SIDT43OCGDMzIn7w',
                 },
                 receiver_id: user,
             },
@@ -66,9 +54,26 @@ export default function NFT() {
         );
     };
 
-    // function handleChange(event) {
-    //     setNewMedia(event.target.files[0]);
-    // }
+    const handleUpload = async (event) => {
+        let file;
+
+        if (event.target.files) {
+            file = event.target.files[0];
+        }
+
+        const { data, error } = supabase.storage
+            .from('cryptonized')
+            .upload(id, file);
+        setNewMedia(
+            `https://wltimvhurxpqqsrwdenw.supabase.co/storage/v1/object/public/cryptonized/${id}`
+        );
+        if (data) {
+            console.log('data', data);
+        }
+        if (error) {
+            console.log('error', error);
+        }
+    };
 
     return (
         <div>
@@ -126,27 +131,12 @@ export default function NFT() {
                                             setNewDescription(e.target.value)
                                         }
                                     />
-                                    {/* <input
+                                    <input
                                         type='file'
-                                        onChange={async (event) => {
-                                            const avatarFile =
-                                                event.target.files[0];
-                                            const { data, error } =
-                                                await supabase.storage
-                                                    .from('cryptonized')
-                                                    .upload(
-                                                        'public/avatar2.png',
-                                                        avatarFile,
-                                                        {
-                                                            cacheControl:
-                                                                '3600',
-                                                            upsert: false,
-                                                        }
-                                                    );
-                                            setNewMedia(data);
-                                            console.log(data);
+                                        onChange={(event) => {
+                                            handleUpload(event);
                                         }}
-                                    /> */}
+                                    />
                                 </form>
                                 <button
                                     className='bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded my-6'
@@ -163,14 +153,17 @@ export default function NFT() {
                                         {newNft.map((token) => (
                                             <div
                                                 key={token.token_id}
-                                                className='w-1/4 p-2'>
+                                                className='p-1 border m-1 m:w-1/6'>
+                                                <p className='text-center'>
+                                                    {token.metadata.title}
+                                                </p>
                                                 <img
                                                     src={token.metadata.media}
                                                     alt={token.metadata.title}
+                                                    className='w-full'
                                                 />
-                                                <p>{token.metadata.title}</p>
 
-                                                <p>
+                                                <p className='text-center'>
                                                     {token.metadata.description}
                                                 </p>
                                             </div>
