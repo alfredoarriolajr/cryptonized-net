@@ -21,7 +21,7 @@ export default function NFT() {
     const [newTitle, setNewTitle] = useState(null);
     const [newDescription, setNewDescription] = useState(null);
     const [newMedia, setNewMedia] = useState('');
-    const id = uuid()
+    const id = uuid();
     const supabase = useSupabaseClient();
 
     useEffect(() => {
@@ -73,6 +73,18 @@ export default function NFT() {
         if (error) {
             console.log('error', error);
         }
+    };
+
+    const handleTransfer = async (token) => {
+        await callFunction(
+            'nft_transfer',
+            {
+                receiver_id: 'cryptonized.testnet',
+                token_id: token,
+            },
+            '0.000000000000000000000001', // attached GAS (optional)
+            '0.000000000000000000000001' // attached GAS (optional)
+        );
     };
 
     return (
@@ -149,23 +161,44 @@ export default function NFT() {
                                     <h1 className='text-2xl border-t-4 pt-4'>
                                         Your NFTs
                                     </h1>
-                                    <div className='flex flex-wrap'>
+                                    <div class='flex flex-wrap'>
                                         {newNft.map((token) => (
-                                            <div
-                                                key={token.token_id}
-                                                className='p-1 border m-1 m:w-1/6'>
-                                                <p className='text-center'>
-                                                    {token.metadata.title}
-                                                </p>
-                                                <img
-                                                    src={token.metadata.media}
-                                                    alt={token.metadata.title}
-                                                    className='w-full'
-                                                />
-
-                                                <p className='text-center'>
-                                                    {token.metadata.description}
-                                                </p>
+                                            <div class='rounded-lg shadow-lg bg-white p-1 border m-1 md:w-1/4 xs:w-full xl:w-1/6'>
+                                                <a
+                                                    href='#!'
+                                                    data-mdb-ripple='true'
+                                                    data-mdb-ripple-color='light'>
+                                                    <img
+                                                        class='rounded-t-lg w-full'
+                                                        src={
+                                                            token.metadata.media
+                                                        }
+                                                        alt={
+                                                            token.metadata.title
+                                                        }
+                                                    />
+                                                </a>
+                                                <div class='p-6'>
+                                                    <h5 class='text-gray-900 text-xl font-medium mb-2'>
+                                                        {token.metadata.title}
+                                                    </h5>
+                                                    <p class='text-gray-700 text-base mb-4'>
+                                                        {
+                                                            token.metadata
+                                                                .description
+                                                        }
+                                                    </p>
+                                                    <button
+                                                        onClick={() => {
+                                                            handleTransfer(
+                                                                token.token_id
+                                                            );
+                                                        }}
+                                                        type='button'
+                                                        class=' inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'>
+                                                        Transfer NFT
+                                                    </button>
+                                                </div>
                                             </div>
                                         ))}
                                     </div>
