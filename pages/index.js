@@ -78,7 +78,7 @@ export default function Home() {
                             </span>
                         </div>
                         <form onSubmit={changeGreeting}>
-                            <label>Change greeting:</label>
+                            <label>Change the contract's message:</label>
                             <input
                                 className='mr-4 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                                 autoComplete='off'
