@@ -13,6 +13,7 @@ import {
     callFunction,
 } from '../near/near-setup';
 import NFT from './nft';
+import Rust from './rust';
 
 export default function Home() {
     const [user, setUser] = useState(null);
@@ -96,8 +97,8 @@ export default function Home() {
                             }}>
                             Sign out
                         </button>
-                        
-                        <NFT />
+                        <Rust />
+                        {/* <NFT /> */}
                     </>
                 )}
             </div>

@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 //Near imports
 import { initNear } from '../near/near-setup';
 import { initNear2 } from '../near/cryptonized';
+import { initNear3 } from '../near/rust';
 
 function MyApp({ Component, pageProps }) {
     const [isLoading, setIsLoading] = useState(true);
@@ -18,6 +19,7 @@ function MyApp({ Component, pageProps }) {
     useEffect(() => {
         initNear();
         initNear2();
+        initNear3();
         setIsLoading(false);
     }, []);
 

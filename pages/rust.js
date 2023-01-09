@@ -15,7 +15,7 @@ import {
 } from '../near/cryptonized';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
-export default function NFT() {
+export default function Rust() {
     const [user, setUser] = useState(null);
     const [newNft, setNewNft] = useState(null);
     const [newTitle, setNewTitle] = useState(null);
@@ -117,9 +117,6 @@ export default function NFT() {
                     <>
                         <div className='mt-6'>
                             <div>
-                                <h1 className='text-yellow-500 mb-4'>
-                                    Javascript Contract
-                                </h1>
                                 <form className=''>
                                     <label htmlFor='title'>Title: </label>
                                     <input
