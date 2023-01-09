@@ -49,7 +49,7 @@ export default function Home() {
 
             <div className='m-6 border-t-4'>
                 {!user ? (
-                    <>
+                    <div className='text-center mt-40'>
                         <h4>
                             Welcome to Cryptonized please connect your near
                             wallet
@@ -59,9 +59,9 @@ export default function Home() {
                             onClick={() => {
                                 signIn();
                             }}>
-                            Sign In
+                            Connect Wallet
                         </button>
-                    </>
+                    </div>
                 ) : (
                     <>
                         <h1 className='mt-6 text-red-500'>Rust Contract</h1>
