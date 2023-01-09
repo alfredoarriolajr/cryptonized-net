@@ -54,6 +54,25 @@ export default function Rust() {
         );
     };
 
+    const sendNFT = async () => {
+        await callFunction(
+            'nft_mint',
+            {
+                token_id: id,
+                metadata: {
+                    title: newTitle,
+                    description: newDescription,
+                    media:
+                        newMedia ||
+                        'https://media.licdn.com/dms/image/C560BAQGnbrbibTKR6Q/company-logo_200_200/0/1672737295471?e=1680739200&v=beta&t=dhlWalKcErYK8iwwIWGmIr4C1U2SIDT43OCGDMzIn7w',
+                },
+                receiver_id: prompt('Enter the receiver ID'),
+            },
+            '1', // attached GAS (optional)
+            '7730000000000000000000' // attached GAS (optional)
+        );
+    };
+
     const handleUpload = async (event) => {
         let file;
 
@@ -116,6 +135,9 @@ export default function Rust() {
                 ) : (
                     <>
                         <div className='mt-6'>
+                            <h1 className='mb-4 text-xl'>
+                                Mint a token
+                            </h1>
                             <div>
                                 <form className=''>
                                     <label htmlFor='title'>Title: </label>
@@ -150,7 +172,47 @@ export default function Rust() {
                                 <button
                                     className='bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded my-6'
                                     onClick={createNFT}>
-                                    Create NFT
+                                    Mint NFT
+                                </button>
+                            </div>
+                            <h1 className='mb-4 text-xl  border-t-4 pt-4'>
+                                Send a token
+                            </h1>
+                            <div>
+                                <form className=''>
+                                    <label htmlFor='title'>Title: </label>
+                                    <input
+                                        className='border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none mx-2'
+                                        type='text'
+                                        name='title'
+                                        id='title'
+                                        onChange={(e) =>
+                                            setNewTitle(e.target.value)
+                                        }
+                                    />
+                                    <label htmlFor='description'>
+                                        Description:
+                                    </label>
+                                    <input
+                                        className='border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none mx-2'
+                                        type='text'
+                                        name='description'
+                                        id='description'
+                                        onChange={(e) =>
+                                            setNewDescription(e.target.value)
+                                        }
+                                    />
+                                    <input
+                                        type='file'
+                                        onChange={(event) => {
+                                            handleUpload(event);
+                                        }}
+                                    />
+                                </form>
+                                <button
+                                    className='bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded my-6'
+                                    onClick={sendNFT}>
+                                    Send NFT
                                 </button>
                             </div>
                             {newNft && (
@@ -160,7 +222,9 @@ export default function Rust() {
                                     </h1>
                                     <div class='flex flex-wrap'>
                                         {newNft.map((token) => (
-                                            <div class='rounded-lg shadow-lg bg-white p-1 border m-1 md:w-1/4 xs:w-full xl:w-1/6' key={token.token_id}>
+                                            <div
+                                                class='rounded-lg shadow-lg bg-white p-1 border m-1 md:w-1/4 xs:w-full xl:w-1/6'
+                                                key={token.token_id}>
                                                 <a
                                                     href='#!'
                                                     data-mdb-ripple='true'

@@ -64,7 +64,7 @@ export default function Home() {
                     </div>
                 ) : (
                     <>
-                        <h1 className='mt-6 text-red-500'>Rust Contract</h1>
+                        <h1 className='mt-6 text-red-500 text-xl mb-2'>Rust Smart Contract</h1>
                         <div>
                             <span>Welcome </span>
                             <span className='text-blue-400 text-xl'>
