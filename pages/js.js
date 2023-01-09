@@ -15,7 +15,7 @@ import {
 } from '../near/cryptonized';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
-export default function NFT() {
+export default function JS() {
     const [user, setUser] = useState(null);
     const [newNft, setNewNft] = useState(null);
     const [newTitle, setNewTitle] = useState(null);
@@ -163,7 +163,7 @@ export default function NFT() {
                                     </h1>
                                     <div class='flex flex-wrap'>
                                         {newNft.map((token) => (
-                                            <div class='rounded-lg shadow-lg bg-white p-1 border m-1 md:w-1/4 xs:w-full xl:w-1/6'>
+                                            <div class='rounded-lg shadow-lg bg-white p-1 border m-1 md:w-1/4 xs:w-full xl:w-1/6' key={token.token_id}>
                                                 <a
                                                     href='#!'
                                                     data-mdb-ripple='true'

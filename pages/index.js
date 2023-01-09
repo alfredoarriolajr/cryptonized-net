@@ -12,7 +12,7 @@ import {
     viewFunction,
     callFunction,
 } from '../near/near-setup';
-import NFT from './nft';
+import JS from './js';
 import Rust from './rust';
 
 export default function Home() {
@@ -98,7 +98,7 @@ export default function Home() {
                             Sign out
                         </button>
                         <Rust />
-                        {/* <NFT /> */}
+                        {/* <JS /> */}
                     </>
                 )}
             </div>
